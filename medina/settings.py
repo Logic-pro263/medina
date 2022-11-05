@@ -1,5 +1,5 @@
 from pathlib import Path
-
+from decouple import config
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -8,7 +8,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-j+7r1w@kkpk_e6r8ofk%g-u&bi64om@mnqdttafego-ib$fg-f'
+SECRET_KEY = config('SK')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -25,7 +25,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'pages'
+    'pages',
+    'shop',
 ]
 
 MIDDLEWARE = [
@@ -64,8 +65,12 @@ WSGI_APPLICATION = 'medina.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'medina',
+        'USER': 'postgres',
+        'PASSWORD': '123456',
+        'HOST': 'localhost',
+        'PORT': '5432'
     }
 }
 
