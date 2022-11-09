@@ -48,7 +48,7 @@
                 <a href="{% url 'wishlist' %}"><img src="{% static 'img/icon/heart.png' %}" alt=""></a>
             </div>
             <div class="offcanvas__cart__item">
-                <a href="#"><img src="{% static 'img/icon/cart.png' %}" alt=""> <span>0</span></a>
+                <a href="{% url 'shooping-cart' %}"><img src="{% static 'img/icon/cart.png' %}" alt=""> <span>0</span></a>
                 <div class="cart__price">Panier: <span>$0.00</span></div>
             </div>
         </div>
@@ -111,7 +111,7 @@
                                     <a href="{% url 'wishlist' %}"><img src="{% static 'img/icon/heart.png' %}" alt=""></a>
                                 </div>
                                 <div class="header__top__right__cart">
-                                    <a href="#"><img src="{% static 'img/icon/cart.png' %}" alt=""> <span>0</span></a>
+                                    <a href="{% url 'shooping-cart' %}"><img src="{% static 'img/icon/cart.png' %}" alt=""> <span>0</span></a>
                                     <div class="cart__price">Panier: <span>$0.00</span></div>
                                 </div>
                             </div>
@@ -132,8 +132,7 @@
                             <li><a href="#">Pages</a>
                                 <ul class="dropdown">
                                     <li><a href="./shop-details.html">Details achats</a></li>
-                                    <li><a href="./checkout.html">Check Out</a></li>
-                                    <li><a href="./wisslist.html">Souhait</a></li>
+                                    <li><a href="./checkout.html">Check Out</a></li>>
                                 </ul>
                             </li>
                             <li><a href="./blog.html">Blog</a></li>

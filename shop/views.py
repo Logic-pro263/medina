@@ -33,3 +33,21 @@ def wishlist(request):
         
     }
     return render(request, 'shop/wishlist.html', context)
+
+
+def shoopingCart(request):
+
+
+    context = {
+        
+    }
+    return render(request, 'shop/shooping-cart.html', context)
+
+
+
+def productlist(request):
+    products = Products.objects.all().filter(available=True)[:8]
+    context ={
+        'products': products
+    }
+    return render(request, 'shop/product.html', context)
