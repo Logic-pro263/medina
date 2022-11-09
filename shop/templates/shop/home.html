@@ -1,0 +1,102 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+
+{% block title %}Boulangerie Pâtisserie MEDINA | Boutique{% endblock %}
+
+{% block content %}
+    <!-- Breadcrumb Begin -->
+    <div class="breadcrumb-option">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="breadcrumb__text">
+                        <h2>Boutique</h2>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="breadcrumb__links">
+                        <a href="{% url 'index' %}">Accueil</a>
+                        <span>Boutique</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Breadcrumb End -->
+
+    <!-- Shop Section Begin -->
+    <section class="shop spad">
+        <div class="container">
+            <div class="shop__option">
+                <div class="row">
+                    <div class="col-lg-8 col-md-8">
+                        <div class="shop__option__search">
+                            <form action="#">
+                                <select>
+                                    <option value="">Categories</option>
+                                    {% for categorie in categories %}
+                                    <option value="">{{categorie.name}}</option>
+                                    {% endfor %}
+                                </select>
+                               
+                                <input type="text" placeholder="Search">
+                                <button type="submit"><i class="fa fa-search"></i></button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4">
+                        <div class="shop__option__right">
+                            <select>
+                                <option value="">Trier</option>
+                                <option value=""> De A à Z</option>
+                                <option value="">De 1 à 8</option>
+                                <option value="">Nom</option>
+                            </select>
+                            <a href="#"><i class="fa fa-list"></i></a>
+                            <a href="#"><i class="fa fa-reorder"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                {% for product in  products %}
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    
+                    <div class="product__item">
+                        <div class="product__item__pic set-bg" data-setbg="{{product.photo.url}}">
+                            <div class="product__label">
+                                <span>{{product.category.name}}</span>
+                            </div>
+                        </div>
+                        <div class="product__item__text">
+                            <h6><a href="{% url 'detail' product.id %}">{{product.name}}</a></h6>
+                            <div class="product__item__price">{{product.price}}</div>
+                            <div class="cart_add">
+                                <a href="#">Ajouter à mon panier</a>
+                            </div>
+                        </div>
+                    </div>
+                 
+                </div>
+                {% endfor %}
+            <div class="shop__last__option">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-6">
+                        <div class="shop__pagination">
+                            <a href="#">1</a>
+                            <a href="#">2</a>
+                            <a href="#">3</a>
+                            <a href="#"><span class="arrow_carrot-right"></span></a>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6">
+                        <div class="shop__last__text">
+                            <p>Showing 1-9 of 10 results</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Shop Section End -->
+{% endblock %}

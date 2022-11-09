@@ -1,0 +1,147 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+{% block title %}Boulangerie Pâtisserie MEDINA | Détail {% endblock  %}
+
+{% block content %}
+    <!-- Breadcrumb Begin -->
+    <div class="breadcrumb-option">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="breadcrumb__text">
+                        <h2>Detail produit</h2>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="breadcrumb__links">
+                        <a href="{% url 'index' %}">Acceuil</a>
+                        <a href="{% url 'home' %}">Boutique</a>
+                        <span>{{details.name}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Breadcrumb End -->
+
+    <!-- Shop Details Section Begin -->
+    <section class="product-details spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="product__details__img">
+                        <div class="product__details__big__img">
+                            <img class="big_img" src="{{details.photo.url}}" alt="{{details.name}}">
+                        </div>
+                        <div class="product__details__thumb">
+                            {% for p in images %}
+                            <div class="pt__item active">
+                                <img data-imgbigurl="{{p.images.url}}"
+                                src="{{p.images.url}}" alt="">
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="product__details__text">
+                        <div class="product__label">{{details.category.name}}</div>
+                        <h4>{{details.name}}</h4>
+                        <h5>{{details.price}} CFA</h5>
+                        <p>{{details.description | truncatewords:20}}</p>
+                        <ul>
+                            <li>SKU: <span>17</span></li>
+                            <li>Categorie: <span>{{details.category.name}}</span></li>
+                            <li>Tags: <span>Gadgets, minimalisstic</span></li>
+                        </ul>
+                        <div class="product__details__option">
+                            <div class="quantity">
+                                <div class="pro-qty">
+                                    <input type="text" value="2">
+                                </div>
+                            </div>
+                            <a href="#" class="primary-btn">Ajouter à mon panier</a>
+                            <a href="#" class="heart__btn"><span class="icon_heart_alt"></span></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="product__details__tab">
+                <div class="col-lg-12">
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab">Description</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#tabs-2" role="tab">Additional information</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab">Previews(1)</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="tabs-1" role="tabpanel">
+                            <div class="row d-flex justify-content-center">
+                                <div class="col-lg-8">
+                                    <p>{{details.description}}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="tabs-2" role="tabpanel">
+                            <div class="row d-flex justify-content-center">
+                                <div class="col-lg-8">
+                                    <p>{{details.Additionnal}}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="tabs-3" role="tabpanel">
+                            <div class="row d-flex justify-content-center">
+                                <div class="col-lg-8">
+                                    <p>{{details.previews}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                 <!-- Related Products Section Begin -->
+    <section class="related-products spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="section-title">
+                        <h2>Produits en relation</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="related__products__slider owl-carousel">
+                    {% for relate in  related %}         
+                    {% if details.id != relate.id %}            
+                    <div class="col-lg-3">
+                        <div class="product__item">
+                            <div class="product__item__pic set-bg" data-setbg="{{relate.photo.url}}">
+                                <div class="product__label">
+                                    <span>{{relate.category.name}}</span>
+                                </div>
+                            </div>
+                            <div class="product__item__text">
+                                <h6><a href="#">{{relate.name}}</a></h6>
+                                <div class="product__item__price">{{relate.price}} CFA</div>
+                                <div class="cart_add">
+                                    <a href="#">Ajouter à mon panier</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Related Products Section End -->
+            </div>
+        </div>
+    </section>
+    <!-- Shop Details Section End -->
+{% endblock  %}

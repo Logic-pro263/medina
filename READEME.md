@@ -18,25 +18,25 @@
     Wishlist
     Class
 
-
+- - - - - - - - - - - -  -- - - - - - - - -  - - - - - - - - -- - - - - - - -
 Shop Model
 - Category
     name 
 
 - Product
     name
-    Price
-    Foreignkey
     Description
     Additionnal Information
     Preview
+    Price
+    Foreignkey
     image
 
     
 - Devise
     name
     value
-
+- - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - -
 - Create blog App
 
     Blog home page
