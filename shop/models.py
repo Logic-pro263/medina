@@ -1,6 +1,22 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
+
+class Customer(models.Model):
+    user = models.OneToOneField(User, null=True, blank=True, on_delete=models.CASCADE)
+    name = models.CharField(max_length=200, null=True)
+    email = models.CharField(max_length=200)
+    phone_number = models.IntegerField()
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'Client'
+        verbose_name_plural = 'Clients'
+    
+
 
 class Category(models.Model):
     name = models.CharField(max_length=70)
@@ -21,6 +37,7 @@ class Products(models.Model):
     price = models.IntegerField()
     available = models.BooleanField(default=False)
     photo = models.ImageField(upload_to='image', blank=True)
+    digital = models.BooleanField(default=False, null=True, blank=False)
     category = models.ForeignKey(Category, related_name='category', on_delete=models.CASCADE)
     
     class Meta:
@@ -44,6 +61,41 @@ class ProductImages(models.Model):
             return self.image.name
         
 
+class Order(models.Model):
+    Customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True, blank=True)
+    date_ordered = models.DateField(auto_now_add=True)
+    complete = models.BooleanField(default=False)
+    transaction_id = models.CharField(max_length=100, null=True)
+
+    def __str__(self):
+        return str(self.id)
+    
+
+class OrderItem(models.Model):
+    product = models.ForeignKey(Products, on_delete=models.SET_NULL, null=True)
+    order = models.ForeignKey(Order, on_delete=models.SET_NULL, null=True)
+    quantity = models.IntegerField(default=0, null=True, blank=True)
+    date_added = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f'{self.product} - {self.quantity}'
+    
+
+
+class ShippingAdress(models.Model):
+    customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True)
+    order = models.ForeignKey(Order, on_delete=models.SET_NULL, null=True)
+    address = models.CharField(max_length=200, null=True)
+    city = models.CharField(max_length=100)
+    about_note = models.BooleanField(default=False)
+    order_note = models.TextField()
+    date_add =models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.name
+    
+
+
 class Devise(models.Model):
     DEVIDE = (
         ('CFA', 'Francs CFA'),
@@ -59,3 +111,16 @@ class Devise(models.Model):
     def __str__(self):
         return self.name
     
+
+class Wishlist(models.Model):
+
+
+    class Meta:
+        verbose_name = ("Favoris")
+        verbose_name_plural = ("Favoris")
+
+    def __str__(self):
+        return self.name
+
+    def get_absolute_url(self):
+        return reverse("Favoris_detail", kwargs={"pk": self.pk})

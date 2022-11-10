@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Category, Products, Devise, ProductImages
+from .models import Category, Products, Order, Devise, ProductImages
 # Register your models here.
 
 
@@ -22,6 +22,12 @@ class ProductsAdmin(admin.ModelAdmin):
 @admin.register(ProductImages)
 class ProductImageAdmin(admin.ModelAdmin):
     pass
+
+
+@admin.register(Order)
+class OrderAdmin(admin.ModelAdmin):
+    pass
+
 
 
 admin.site.register(Devise)
