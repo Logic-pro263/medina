@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Category, Products, Order, Devise, ProductImages
+from .models import Category, Products, Order, Devise, ProductImages, Customer, OrderItem, ShippingAdress
 # Register your models here.
 
 
@@ -8,6 +8,18 @@ class ProductImagesAdmin(admin.StackedInline):
 
 
 admin.site.register(Category)
+
+
+@admin.register(OrderItem)
+class OrderItemAdmin(admin.ModelAdmin):
+    list_display = ['order', 'quantity', 'date_added']
+
+
+@admin.register(Customer)
+class CustomerAdmin(admin.ModelAdmin):
+    list_display = ['name', 'email', 'phone_number']
+
+
 
 @admin.register(Products)
 class ProductsAdmin(admin.ModelAdmin):

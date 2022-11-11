@@ -47,6 +47,14 @@ class Products(models.Model):
     def __str__(self):
         return f'{self.name} - {self.category}'
 
+        @property
+        def imageURL(self):
+            try:
+                url = self.image.url
+            except:
+                url=''
+            return url
+
 
     
 class ProductImages(models.Model):
