@@ -47,13 +47,13 @@ class Products(models.Model):
     def __str__(self):
         return f'{self.name} - {self.category}'
 
-        @property
-        def imageURL(self):
-            try:
-                url = self.image.url
-            except:
-                url=''
-            return url
+    @property
+    def imageURL(self):
+        try:
+            url = self.photo.url
+        except:
+            url=''
+        return url
 
 
     
@@ -78,7 +78,14 @@ class Order(models.Model):
     def __str__(self):
         return str(self.id)
     
+    @property
+    def get_cart_total(self): 
+        orderitems = self.orderitem_set.all()
+        total = sum([item.get_total for item in orderitems])
+        return total
 
+
+# Customer' order
 class OrderItem(models.Model):
     product = models.ForeignKey(Products, on_delete=models.SET_NULL, null=True)
     order = models.ForeignKey(Order, on_delete=models.SET_NULL, null=True)
@@ -87,6 +94,11 @@ class OrderItem(models.Model):
 
     def __str__(self):
         return f'{self.product} - {self.quantity}'
+
+    @property
+    def get_total(self):
+        total = self.product.price * self.quantity
+        return total
     
 
 
@@ -121,8 +133,8 @@ class Devise(models.Model):
     
 
 class Wishlist(models.Model):
-
-
+    customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True)
+    products = models.ForeignKey(Products, on_delete=models.SET_NULL, null=True)
     class Meta:
         verbose_name = ("Favoris")
         verbose_name_plural = ("Favoris")

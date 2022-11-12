@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Category, Products, ProductImages, Devise, Order, OrderItem, ShippingAdress
+from .models import Category, Products, ProductImages, Devise, Order, OrderItem, ShippingAdress, Wishlist
 
 # Create your views here.
 
@@ -33,7 +33,9 @@ def shop_detail(request, product_id):
 # User Wishlist
 def wishlist(request):
     if request.user.is_authenticated:
-        pass
+        customer = request.user.customer
+        customer, product = Wishlist.objects.get_or_create(customer=customer, wishlist=product)
+        #items 
     context = {
         
     }
@@ -50,16 +52,14 @@ def shoopingCart(request):
         items = order.orderitem_set.all()
     else:
         items =  []
+        order = {'get_cart_total': 0}
     context = {
-        'items': items
+        'items': items,
+        'order': order
     }
     return render(request, 'shop/shooping-cart.html', context)
 
 
-
-def productlist(request):
-    products = Products.objects.all().filter(available=True)[:8]
-    context ={
-        'products': products
-    }
-    return render(request, 'shop/product.html', context)
+# Checkout page
+def checkout(request):
+    pass
