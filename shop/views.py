@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, reverse
 from .models import Category, Products, ProductImages, Devise, Order, OrderItem, ShippingAdress, Wishlist
 
 # Create your views here.
@@ -16,8 +16,8 @@ def home(request):
 
 
 # Product detail and related product 
-def shop_detail(request, product_id):
-    productDetail = get_object_or_404(Products, id=product_id)
+def shop_detail(request, slug):
+    productDetail = get_object_or_404(Products, slug=slug)
     images = ProductImages.objects.filter(products=productDetail)[:8]
     related = Products.objects.filter(category=productDetail.category)[:8]
 

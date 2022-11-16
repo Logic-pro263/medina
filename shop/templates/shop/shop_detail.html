@@ -2,6 +2,20 @@
 {% load static %}
 {% block title %}Boulangerie Pâtisserie MEDINA | Détail {% endblock  %}
 
+{% block nav %}
+<li><a href="{% url 'index' %}">Accueil</a></li>
+<li><a href="{% url 'about' %}">A Propos</a></li>
+<li><a href="{% url 'home' %}">Boutique</a></li>
+<li class='active'><a href="#">Pages</a>
+    <ul class="dropdown">
+        <li><a href="./shop-details.html">Details achats</a></li>
+        <li><a href="./checkout.html">Check Out</a></li>>
+    </ul>
+</li>
+<li><a href="./blog.html">Blog</a></li>
+<li><a href="{% url 'contact' %}">Contact</a></li>
+{% endblock  %}
+
 {% block content %}
     <!-- Breadcrumb Begin -->
     <div class="breadcrumb-option">
@@ -116,7 +130,7 @@
             <div class="row">
                 <div class="related__products__slider owl-carousel">
                     {% for relate in  related %}         
-                    {% if details.id != relate.id %}            
+                    {% if details.slug != relate.slug %}            
                     <div class="col-lg-3">
                         <div class="product__item">
                             <div class="product__item__pic set-bg" data-setbg="{{relate.photo.url}}">
@@ -125,7 +139,7 @@
                                 </div>
                             </div>
                             <div class="product__item__text">
-                                <h6><a href="#">{{relate.name}}</a></h6>
+                                <h6><a href="{% url 'detail' relate.slug %}">{{relate.name}}</a></h6>
                                 <div class="product__item__price">{{relate.price}} CFA</div>
                                 <div class="cart_add">
                                     <a href="#">Ajouter à mon panier</a>

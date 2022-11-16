@@ -3,6 +3,20 @@
 
 {% block title %}Boulangerie Pâtisserie MEDINA | Favoris{% endblock  %}
 
+{% block nav %}
+<li><a href="{% url 'index' %}">Accueil</a></li>
+<li><a href="{% url 'about' %}">A Propos</a></li>
+<li><a href="{% url 'home' %}">Boutique</a></li>
+<li class='active'><a href="#">Pages</a>
+    <ul class="dropdown">
+        <li><a href="./shop-details.html">Details achats</a></li>
+        <li><a href="./checkout.html">Check Out</a></li>>
+    </ul>
+</li>
+<li><a href="./blog.html">Blog</a></li>
+<li><a href="{% url 'contact' %}">Contact</a></li>
+{% endblock  %}
+
 {% block content %}
  <!-- Breadcrumb Begin -->
  <div class="breadcrumb-option">

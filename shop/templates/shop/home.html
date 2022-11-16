@@ -3,6 +3,20 @@
 
 {% block title %}Boulangerie Pâtisserie MEDINA | Boutique{% endblock %}
 
+{% block nav %}
+<li><a href="{% url 'index' %}">Accueil</a></li>
+<li><a href="{% url 'about' %}">A Propos</a></li>
+<li class='active'><a href="{% url 'home' %}">Boutique</a></li>
+<li><a href="#">Pages</a>
+    <ul class="dropdown">
+        <li><a href="./shop-details.html">Details achats</a></li>
+        <li><a href="./checkout.html">Check Out</a></li>>
+    </ul>
+</li>
+<li><a href="./blog.html">Blog</a></li>
+<li><a href="{% url 'contact' %}">Contact</a></li>
+{% endblock  %}
+
 {% block content %}
     <!-- Breadcrumb Begin -->
     <div class="breadcrumb-option">
@@ -59,6 +73,7 @@
                 </div>
             </div>
             <div class="row">
+            
                 {% for product in  products %}
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     
@@ -69,7 +84,7 @@
                             </div>
                         </div>
                         <div class="product__item__text">
-                            <h6><a href="{% url 'detail' product.id %}">{{product.name}}</a></h6>
+                            <h6><a href="{% url 'detail' product.slug %}">{{product.name}}</a></h6>
                             <div class="product__item__price">{{product.price}}</div>
                             <div class="cart_add">
                                 <a href="#">Ajouter à mon panier</a>
@@ -79,6 +94,7 @@
                  
                 </div>
                 {% endfor %}
+            </div>
             <div class="shop__last__option">
                 <div class="row">
                     <div class="col-lg-6 col-md-6 col-sm-6">

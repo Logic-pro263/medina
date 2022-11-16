@@ -49,7 +49,7 @@
             </div>
             <div class="offcanvas__cart__item">
                 <a href="{% url 'shooping-cart' %}"><img src="{% static 'img/icon/cart.png' %}" alt=""> <span>0</span></a>
-                <div class="cart__price">Panier: <span>$0.00</span></div>
+                <div class="cart__price">Panier: <span>{% block panier %}{% endblock  %}</span></div>
             </div>
         </div>
         <div class="offcanvas__logo">
@@ -126,17 +126,7 @@
                 <div class="col-lg-12">
                     <nav class="header__menu mobile-menu">
                         <ul>
-                            <li class="active"><a href="{% url 'index' %}">Accueil</a></li>
-                            <li><a href="{% url 'about' %}">A Propos</a></li>
-                            <li><a href="{% url 'home' %}">Boutique</a></li>
-                            <li><a href="#">Pages</a>
-                                <ul class="dropdown">
-                                    <li><a href="./shop-details.html">Details achats</a></li>
-                                    <li><a href="./checkout.html">Check Out</a></li>>
-                                </ul>
-                            </li>
-                            <li><a href="./blog.html">Blog</a></li>
-                            <li><a href="{% url 'contact' %}">Contact</a></li>
+                           {% block nav %}{% endblock  %}
                         </ul>
                     </nav>
                 </div>
@@ -147,7 +137,7 @@
         {% block content %}
           
         {% endblock %}
-
+</body>
          <!-- Footer Section Begin -->
     <footer class="footer set-bg" data-setbg="{% static 'img/footer-bg.jpg' %}">
         <div class="container">
